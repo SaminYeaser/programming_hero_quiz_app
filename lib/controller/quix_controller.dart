@@ -14,7 +14,7 @@ class QuizController extends GetxController with GetSingleTickerProviderStateMix
   AnimationController? animationController;
   Animation? animationPrime;
   Animation? get animation => animationPrime;
-  final PageController controller = PageController();
+  // final PageController controller = PageController();
   final ApiService _apiService = ApiService();
   final box = GetStorage();
 
@@ -34,7 +34,7 @@ class QuizController extends GetxController with GetSingleTickerProviderStateMix
 
   @override
   void dispose() {
-    controller.dispose();
+    // controller.dispose();
     super.dispose();
   }
 

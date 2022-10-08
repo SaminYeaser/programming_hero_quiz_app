@@ -17,13 +17,13 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   final QuizController _quizController = Get.find();
-
+  PageController? controller;
 
 
   // final CountdownController _controller = CountdownController(autoStart: false);
   final pages = 1.obs;
   void nextScreen(){
-    _quizController.controller.nextPage(
+    controller!.nextPage(
         duration: Duration(milliseconds: 1000),
         curve: Curves.easeIn
     );
@@ -31,6 +31,7 @@ class _QuizPageState extends State<QuizPage> {
   }
   @override
   void initState() {
+    controller = PageController();
     _quizController.animationPrime = Tween<double>(begin: 0 ,end: 1).animate(_quizController.animationController!)..addListener(() {
       _quizController.update();
     });
@@ -88,7 +89,7 @@ class _QuizPageState extends State<QuizPage> {
               Center(child: CircularProgressIndicator(),):
               PageView.builder(
                   physics: const NeverScrollableScrollPhysics(),
-                  controller: _quizController.controller,
+                  controller: controller,
                   itemCount: _quizController.quizList.value.value!.questions!.length,
                   onPageChanged: (value){
                     pages.value = value + 1;
@@ -196,7 +197,7 @@ class _QuizPageState extends State<QuizPage> {
                                 correctAnswer: _quizController.quizList.value.value!.questions![index].correctAnswer,
                                 questionNumber: 'A',
                                 score: _quizController.quizList.value.value!.questions![index].score,
-                                pageController: _quizController.controller,
+                                pageController: controller,
                               pageNumber: pages.value
                             ),
                             questionAnswer(
@@ -205,7 +206,7 @@ class _QuizPageState extends State<QuizPage> {
                                 correctAnswer: _quizController.quizList.value.value!.questions![index].correctAnswer,
                                 questionNumber: 'B',
                                 score: _quizController.quizList.value.value!.questions![index].score,
-                                pageController: _quizController.controller,
+                                pageController: controller,
                                 pageNumber: pages.value
                             ),
                             _quizController.quizList.value.value!.questions![index].answers!.c == null ?
@@ -216,7 +217,7 @@ class _QuizPageState extends State<QuizPage> {
                                 correctAnswer: _quizController.quizList.value.value!.questions![index].correctAnswer,
                                 questionNumber: 'C',
                                 score: _quizController.quizList.value.value!.questions![index].score,
-                                pageController: _quizController.controller,
+                                pageController: controller,
                                 pageNumber: pages.value
                             ),
                             _quizController.quizList.value.value!.questions![index].answers!.d == null ?
@@ -227,7 +228,7 @@ class _QuizPageState extends State<QuizPage> {
                                 correctAnswer: _quizController.quizList.value.value!.questions![index].correctAnswer,
                                 questionNumber: 'D',
                                 score: _quizController.quizList.value.value!.questions![index].score,
-                                pageController: _quizController.controller,
+                                pageController: controller,
                                 pageNumber: pages.value
                             ),
                             SizedBox(height: 10,),
@@ -237,7 +238,7 @@ class _QuizPageState extends State<QuizPage> {
                               child: InkWell(
                                 onTap: (){
                                   Get.to(ScoreDashboard());
-                                  _quizController.controller.dispose();
+                                  controller!.dispose();
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

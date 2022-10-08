@@ -18,6 +18,7 @@ class ScoreDashboard extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: InkWell(
           onTap: (){
+            _quizController.totalScore.value = 0;
             box.write('prev_score', box.read('score'));
             Get.to(HomePage());
           },
