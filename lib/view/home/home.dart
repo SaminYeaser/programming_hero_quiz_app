@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:programming_hero_quiz_app/utils.dart';
 import 'package:get/get.dart';
 
 import '../quiz/quiz.dart';
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+   HomePage({Key? key}) : super(key: key);
+  final box = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,11 @@ class HomePage extends StatelessWidget {
                   fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold
               ),),
               SizedBox(height: 5,),
-              Text('500 Points',style: TextStyle(
+              box.read('score') == null ?
+              Text('0 Points',style: TextStyle(
+                  fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold
+              ),) :
+              Text('${box.read('score')} Points',style: TextStyle(
                   fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold
               ),),
               SizedBox(height: 40,),
