@@ -135,7 +135,7 @@ class _QuizPageState extends State<QuizPage> {
                                         Positioned.fill(
                                           child: Padding(
                                             padding:
-                                            EdgeInsets.symmetric(horizontal: 5),
+                                            EdgeInsets.all(5),
                                             child: Text(
                                               '${(stackController.animation!.value * 10).round()} Sec',),
                                           ),

@@ -19,14 +19,14 @@ class QuizController extends GetxController with GetSingleTickerProviderStateMix
   final box = GetStorage();
 
   @override
-  void onInit(){
+  void onInit() async{
   animationController = AnimationController(duration: const Duration(seconds: 10),vsync: this);
   // animationPrime = Tween<double>(begin: 0 ,end: 1).animate(animationController!)..addListener(() {
   //   update();
   // });
   // animationController!.forward();
 
-  getAllQuestions().then((value){
+  await getAllQuestions().then((value){
       quizList.value.value = questionsFromJson(value);
     });
     super.onInit();
